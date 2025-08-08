@@ -18,3 +18,9 @@ jobs:
 
     - name: Push Docker image
       run: docker push ghcr.io/dineshuday/fanpulse:${{ github.sha }}
+    
+    - name: Push latest tag
+      if: github.ref == 'refs/heads/main'
+      run: |
+        docker tag ghcr.io/dineshuday/fanpulse:${{ github.sha }} ghcr.io/dineshuday/fanpulse:latest
+        docker push ghcr.io/dineshuday/fanpulse:latest
