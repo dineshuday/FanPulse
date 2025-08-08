@@ -1,0 +1,23 @@
+name: Deploy to Kubernetes
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Log in to GitHub Container Registry
+      run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+
+    - name: Build Docker image
+      run: docker build -t ghcr.io/${{ github.repository }}/fanpulse:${{ github.sha }} ./app
+
+    - name: Push Docker image
+      run: docker push ghcr.io/${{ github.repository }}/fanpulse:${{ github.sha }}
+
+    - name: Deploy with Helm
+      run: helm upgrade --install fanpulse ./charts/fanpulse --set image.repository=ghcr.io/${{ github.repository }}/fanpulse --set image.tag=${{ github.sha }}

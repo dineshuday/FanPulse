@@ -1,0 +1,20 @@
+replicaCount: 2
+image:
+  repository: ghcr.io/dineshuday/fanpulse
+  tag: latest
+  pullPolicy: IfNotPresent
+service:
+  type: NodePort
+  port: 5000
+resources:
+  limits:
+    cpu: 200m
+    memory: 256Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
+additionalScrapeConfigs:
+  - job_name: 'fanpulse-app'
+    metrics_path: /metrics
+    static_configs:
+      - targets: ['fanpulse.default.svc.cluster.local:5000']

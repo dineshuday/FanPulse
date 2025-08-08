@@ -1,0 +1,6 @@
+apiVersion: v2
+name: fanpulse
+description: A simple sports score service for DevOps demo
+type: application
+version: 0.1.0
+appVersion: "1.0"

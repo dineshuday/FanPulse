@@ -1,0 +1,83 @@
+{
+  "annotations": {
+    "list": []
+  },
+  "panels": [
+    {
+      "type": "graph",
+      "title": "App Requests Total",
+      "targets": [
+        {
+          "expr": "app_requests_total",
+          "legendFormat": "Total Requests",
+          "refId": "A"
+        }
+      ],
+      "xaxis": {
+        "mode": "time"
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "min": "0"
+        },
+        {
+          "format": "short"
+        }
+      ],
+      "id": 1
+    },
+    {
+      "type": "graph",
+      "title": "CPU Usage",
+      "targets": [
+        {
+          "expr": "sum(rate(container_cpu_usage_seconds_total{pod=~\"fanpulse-.*\"}[1m])) by (pod)",
+          "legendFormat": "{{pod}}",
+          "refId": "B"
+        }
+      ],
+      "xaxis": {
+        "mode": "time"
+      },
+      "yaxes": [
+        {
+          "format": "percent",
+          "min": 0,
+          "max": 1
+        },
+        {
+          "format": "short"
+        }
+      ],
+      "id": 2
+    },
+    {
+      "type": "graph",
+      "title": "Memory Usage (Bytes)",
+      "targets": [
+        {
+          "expr": "sum(container_memory_usage_bytes{pod=~\"fanpulse-.*\"}) by (pod)",
+          "legendFormat": "{{pod}}",
+          "refId": "C"
+        }
+      ],
+      "xaxis": {
+        "mode": "time"
+      },
+      "yaxes": [
+        {
+          "format": "bytes",
+          "min": 0
+        },
+        {
+          "format": "short"
+        }
+      ],
+      "id": 3
+    }
+  ],
+  "schemaVersion": 30,
+  "title": "FanPulse Monitoring",
+  "version": 1
+}
