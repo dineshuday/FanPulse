@@ -18,6 +18,3 @@ jobs:
 
     - name: Push Docker image
       run: docker push ghcr.io/dineshuday/fanpulse:${{ github.sha }}
-
-    - name: Deploy with Helm
-      run: helm upgrade --install fanpulse ./charts/fanpulse --set image.repository=ghcr.io/dineshuday/fanpulse --set image.tag=${{ github.sha }}
