@@ -10,7 +10,7 @@ A simple sports score API deployed on Kubernetes with Helm, monitored via Promet
 - Observability with Prometheus, Grafana, Loki
 - Horizontal scaling with HPA
 
-## Quick Start
+## Quick Start Guide
 
 1. Start Minikube:
 
