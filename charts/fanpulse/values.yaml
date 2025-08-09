@@ -13,8 +13,3 @@ resources:
   requests:
     cpu: 100m
     memory: 128Mi
-additionalScrapeConfigs:
-  - job_name: 'fanpulse-app'
-    metrics_path: /metrics
-    static_configs:
-      - targets: ['fanpulse.default.svc.cluster.local:5000']
