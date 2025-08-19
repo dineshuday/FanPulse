@@ -29,12 +29,61 @@
     },
     {
       "type": "graph",
+      "title": "App Errors Total",
+      "targets": [
+        {
+          "expr": "app_errors_total",
+          "legendFormat": "Total Errors",
+          "refId": "B"
+        }
+      ],
+      "xaxis": {
+        "mode": "time"
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "min": "0"
+        },
+        {
+          "format": "short"
+        }
+      ],
+      "id": 2
+    },
+    {
+      "type": "graph",
+      "title": "Error Rate (%)",
+      "targets": [
+        {
+          "expr": "100 * (rate(app_errors_total[5m]) / rate(app_requests_total[5m]))",
+          "legendFormat": "Error Rate %",
+          "refId": "C"
+        }
+      ],
+      "xaxis": {
+        "mode": "time"
+      },
+      "yaxes": [
+        {
+          "format": "percent",
+          "min": 0,
+          "max": 100
+        },
+        {
+          "format": "short"
+        }
+      ],
+      "id": 3
+    },
+    {
+      "type": "graph",
       "title": "CPU Usage",
       "targets": [
         {
           "expr": "sum(rate(container_cpu_usage_seconds_total{pod=~\"fanpulse-.*\"}[1m])) by (pod)",
           "legendFormat": "{{pod}}",
-          "refId": "B"
+          "refId": "D"
         }
       ],
       "xaxis": {
@@ -50,7 +99,7 @@
           "format": "short"
         }
       ],
-      "id": 2
+      "id": 4
     },
     {
       "type": "graph",
@@ -59,7 +108,7 @@
         {
           "expr": "sum(container_memory_usage_bytes{pod=~\"fanpulse-.*\"}) by (pod)",
           "legendFormat": "{{pod}}",
-          "refId": "C"
+          "refId": "E"
         }
       ],
       "xaxis": {
@@ -74,7 +123,7 @@
           "format": "short"
         }
       ],
-      "id": 3
+      "id": 5
     }
   ],
   "schemaVersion": 30,
